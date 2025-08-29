@@ -1,14 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    optimizePackageImports: ['framer-motion', 'lucide-react'],
+    optimizePackageImports: ['lucide-react'],
   },
+  basePath: process.env.NODE_ENV === 'production' ? '/OXYGENmase-portfolio' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/OXYGENmase-portfolio/' : '',
+  trailingSlash: true,
+  output: 'export',
   images: {
-    domains: ['avatars.githubusercontent.com'],
-  },
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
+    unoptimized: true
+  }
 }
 
 module.exports = nextConfig
