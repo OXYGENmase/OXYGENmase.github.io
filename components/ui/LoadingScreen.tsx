@@ -195,7 +195,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
               {loadingProgress >= 25 && loadingProgress < 50 && 'Loading core modules...'}
               {loadingProgress >= 50 && loadingProgress < 75 && 'Preparing interface...'}
               {loadingProgress >= 75 && loadingProgress < 100 && 'Finalizing setup...'}
-              {loadingProgress >= 100 && 'Ready to unleash power! ⚡'}
+              {loadingProgress >= 100 && 'Coded fully by OXYGENmase (I don\'t do frontend) ⚡'}
             </motion.div>
           </div>
 
