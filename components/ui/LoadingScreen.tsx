@@ -22,10 +22,8 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
   ]
 
   useEffect(() => {
-    // Start loading animation
     const timer = setTimeout(() => setShowContent(true), 500)
 
-    // Simulate loading progress
     const progressInterval = setInterval(() => {
       setLoadingProgress(prev => {
         if (prev >= 100) {
@@ -39,7 +37,6 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       })
     }, 200)
 
-    // Update loading phases
     const phaseInterval = setInterval(() => {
       setCurrentPhase(prev => {
         if (prev >= loadingPhases.length - 1) {
@@ -55,7 +52,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
       clearInterval(progressInterval)
       clearInterval(phaseInterval)
     }
-  }, [onLoadingComplete])
+  }, [onLoadingComplete, loadingPhases.length])
 
   return (
     <AnimatePresence>
@@ -66,9 +63,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 flex items-center justify-center"
         >
-          {/* Animated Background */}
           <div className="absolute inset-0 overflow-hidden">
-            {/* Floating particles */}
             {Array.from({ length: 50 }).map((_, i) => (
               <motion.div
                 key={i}
@@ -89,7 +84,6 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
               />
             ))}
             
-            {/* Energy waves */}
             <motion.div
               className="absolute inset-0"
               animate={{
@@ -108,9 +102,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
             />
           </div>
 
-          {/* Main Content */}
           <div className="relative z-10 text-center">
-            {/* Logo/Title */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
@@ -126,7 +118,6 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
               </div>
             </motion.div>
 
-            {/* Loading Phase */}
             <motion.div
               key={currentPhase}
               initial={{ opacity: 0, y: 20 }}
@@ -150,7 +141,6 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
               </div>
             </motion.div>
 
-            {/* Progress Bar */}
             <div className="w-80 md:w-96 mx-auto mb-8">
               <div className="relative">
                 <div className="w-full h-3 bg-dark-700 rounded-full overflow-hidden">
@@ -174,7 +164,6 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
               </div>
             </div>
 
-            {/* Loading Animation */}
             <motion.div
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
@@ -183,7 +172,6 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
               <div className="w-full h-full border-4 border-ki-400 border-t-transparent rounded-full animate-spin" />
             </motion.div>
 
-            {/* Status Messages */}
             <motion.div
               key={loadingProgress}
               initial={{ opacity: 0 }}
@@ -199,7 +187,6 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
             </motion.div>
           </div>
 
-          {/* Corner Decorations */}
           <div className="absolute top-8 left-8 w-16 h-16 border-2 border-ki-400/30 rounded-lg" />
           <div className="absolute top-8 right-8 w-16 h-16 border-2 border-ultra-400/30 rounded-lg" />
           <div className="absolute bottom-8 left-8 w-16 h-16 border-2 border-primary-400/30 rounded-lg" />

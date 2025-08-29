@@ -15,9 +15,7 @@ export default function Home() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // Preload critical resources
     const preloadResources = async () => {
-      // Simulate resource loading
       await new Promise(resolve => setTimeout(resolve, 2000))
       setIsLoading(false)
     }
@@ -27,7 +25,6 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading) {
-      // Small delay to ensure smooth transition
       const timer = setTimeout(() => setIsVisible(true), 100)
       return () => clearTimeout(timer)
     }
