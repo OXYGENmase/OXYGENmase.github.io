@@ -59,6 +59,31 @@ export default function DllInjectionGame() {
     e.preventDefault()
   }
 
+  // Mobile touch handlers
+  const handleFileTouchStart = (e: React.TouchEvent) => {
+    if (!injectionState.fileInSyringe) {
+      e.preventDefault()
+      // Simulate drag for mobile
+      setTimeout(() => {
+        if (syringeRef.current && !injectionState.fileInSyringe) {
+          setInjectionState(prev => ({ ...prev, fileInSyringe: true }))
+        }
+      }, 500)
+    }
+  }
+
+  const handleSyringeTouchStart = (e: React.TouchEvent) => {
+    if (injectionState.fileInSyringe && !injectionState.injecting) {
+      e.preventDefault()
+      // Simulate drag for mobile
+      setTimeout(() => {
+        if (gameRef.current && injectionState.fileInSyringe && !injectionState.injecting) {
+          startInjection()
+        }
+      }, 500)
+    }
+  }
+
   const startInjection = () => {
     setInjectionState(prev => ({ ...prev, injecting: true }))
     
@@ -100,7 +125,9 @@ export default function DllInjectionGame() {
           <span className="ki-text">DLL</span> <span className="ultra-text">Injection</span> <span className="ki-text">Simulator</span>
         </h3>
         <p className="text-gray-300">
-          Drag the file into the syringe, then inject it into the game!
+          {typeof window !== 'undefined' && 'ontouchstart' in window 
+            ? 'Tap the file, then tap the syringe, then tap the game!' 
+            : 'Drag the file into the syringe, then inject it into the game!'}
         </p>
       </div>
 
@@ -112,6 +139,7 @@ export default function DllInjectionGame() {
           ref={fileRef}
           draggable={!injectionState.fileInSyringe}
           onDragStart={handleFileDragStart}
+          onTouchStart={handleFileTouchStart}
           className={`absolute top-4 left-4 cursor-grab active:cursor-grabbing z-10 transition-all duration-300 ${
             injectionState.fileInSyringe ? 'opacity-0' : 'opacity-100'
           }`}
@@ -133,6 +161,7 @@ export default function DllInjectionGame() {
           onDragStart={handleSyringeDragStart}
           onDrop={handleSyringeDrop}
           onDragOver={handleSyringeDragOver}
+          onTouchStart={handleSyringeTouchStart}
           className={`absolute top-4 right-4 cursor-grab active:cursor-grabbing z-10 ${
             injectionState.injecting ? 'animate-pulse' : ''
           }`}
@@ -270,8 +299,18 @@ export default function DllInjectionGame() {
         {!injectionState.fileInSyringe && !injectionState.injecting && !injectionState.success && !injectionState.error && (
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
             <div className="text-gray-400 text-sm">
-              <div className="mb-2">1. Drag the DLL file into the syringe</div>
-              <div>2. Drag the syringe to the game to inject</div>
+              {typeof window !== 'undefined' && 'ontouchstart' in window ? (
+                <>
+                  <div className="mb-2">1. Tap the DLL file</div>
+                  <div>2. Tap the syringe</div>
+                  <div>3. Tap the game to inject</div>
+                </>
+              ) : (
+                <>
+                  <div className="mb-2">1. Drag the DLL file into the syringe</div>
+                  <div>2. Drag the syringe to the game to inject</div>
+                </>
+              )}
             </div>
           </div>
         )}
