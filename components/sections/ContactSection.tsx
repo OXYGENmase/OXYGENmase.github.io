@@ -47,6 +47,7 @@ export default function ContactSection() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState('')
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -81,18 +82,38 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError('')
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
+    try {
+      const emailContent = `
+New Contact Form Submission from OXYGENmase Portfolio
+
+Name: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
+
+Message:
+${formData.message}
+
+---
+Sent from: https://oxygenmase.github.io/
+      `.trim()
+
+      const mailtoUrl = `mailto:oxygenmase@proton.me?subject=${encodeURIComponent(`Portfolio Contact: ${formData.subject}`)}&body=${encodeURIComponent(emailContent)}`
+      
+      window.open(mailtoUrl, '_blank')
+      
+      setIsSubmitted(true)
       setFormData({ name: '', email: '', subject: '', message: '' })
-    }, 3000)
+      
+      setTimeout(() => {
+        setIsSubmitted(false)
+      }, 5000)
+    } catch (err) {
+      setError('Failed to open email client. Please email me directly at oxygenmase@proton.me')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -261,6 +282,10 @@ export default function ContactSection() {
                 />
               </div>
               
+              {error && (
+                <p className="text-red-500 text-sm">{error}</p>
+              )}
+
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
