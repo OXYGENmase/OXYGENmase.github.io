@@ -15,10 +15,10 @@ export default function Home() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // Preload critical resources
+    // Preload critical resources and give more time for satisfaction
     const preloadResources = async () => {
-      // Simulate resource loading
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      // Simulate resource loading with longer duration
+      await new Promise(resolve => setTimeout(resolve, 9500)) // 9.5 seconds total
       setIsLoading(false)
     }
 
@@ -51,40 +51,40 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 1.2, ease: 'easeOut' }}
             className="min-h-screen bg-dark-900"
           >
             <AnimatedBackground />
             <Navigation />
-            
+
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 1, delay: 0.3 }}
             >
               <HeroSection />
             </motion.div>
-            
+
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 1, delay: 0.5 }}
             >
               <SkillsSection />
             </motion.div>
-            
+
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 1, delay: 0.7 }}
             >
               <PowerLevelSection />
             </motion.div>
-            
+
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              transition={{ duration: 1, delay: 0.9 }}
             >
               <ContactSection />
             </motion.div>
