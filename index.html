@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Security Developer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="splash">
+        <div class="terminal">
+            <div class="line"><span class="status ok">[OK]</span> Loading kernel modules...</div>
+            <div class="line"><span class="status ok">[OK]</span> Initializing memory interface...</div>
+            <div class="line"><span class="status ok">[OK]</span> Mapping physical memory...</div>
+            <div class="line"><span class="status ok">[OK]</span> Bypass modules loaded</div>
+            <div class="line"><span class="status ok">[OK]</span> Anti-cheat hooks established</div>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Game Security Developer</h1>
+            <p class="lead">
+                I build game cheats, bypass anti-cheat systems, and reverse engineer protected binaries.
+            </p>
+            <div class="skills">
+                <span class="cpp-tag"><img src="icons/c-.png" alt="">C++</span>
+                <span class="ghidra"><img src="icons/ghidra logo.png" alt="">Reverse Engineering</span>
+                <span class="windows"><img src="icons/windows.png" alt="">Kernel Drivers</span>
+                <span class="gui"><img src="icons/gui.png" alt="">ImGui</span>
+            </div>
+        </header>
+
+        <section class="notice">
+            <img src="icons/warning.png" alt="" class="warning-icon">
+            <p>Serious collabs only. Do not waste my time trying to gauge my capabilities. I'm good at what I do and my time is limited.</p>
+        </section>
+
+        <section class="notice disclaimer">
+            <img src="icons/alert.png" alt="" class="warning-icon">
+            <p>I do not condone game cheating. This work is done from a defensive security perspective to understand how anti-cheat systems are bypassed and how to better protect against these techniques.</p>
+        </section>
+
+        <section class="projects">
+            <h2>Projects</h2>
+            
+            <article class="project">
+                <div class="project-header">
+                    <h3>IOCTL Kernel Driver</h3>
+                    <span class="lang"><img src="icons/c-.png" alt="">C++</span>
+                </div>
+                <p class="desc">Kernel-mode driver using IOCTL interface for communication. Bypasses EAC, Vanguard, and other kernel-level anti-cheats through direct memory operations and process protection.</p>
+                <ul class="tech">
+                    <li>Windows Driver Kit</li>
+                    <li>IOCTL interface</li>
+                    <li>Physical memory read/write</li>
+                    <li>Process handle stripping</li>
+                    <li>PEB/TEB walking</li>
+                </ul>
+            </article>
+
+            <article class="project">
+                <div class="project-header">
+                    <h3>External Apex</h3>
+                    <span class="lang"><img src="icons/c-.png" alt="">C++</span>
+                </div>
+                <p class="desc">Kernel external cheat for Apex Legends. Uses kernel driver for memory operations, stays completely external to target process. No injection, no traces in user-mode.</p>
+                <ul class="tech">
+                    <li>Kernel driver communication</li>
+                    <li>Memory parsing</li>
+                    <li>Bone matrix calculation</li>
+                    <li>Overlay rendering</li>
+                </ul>
+            </article>
+
+            <article class="project">
+                <div class="project-header">
+                    <h3>Sea of Thieves Bypass</h3>
+                    <span class="lang"><img src="icons/c-.png" alt="">C++</span>
+                </div>
+                <p class="desc">Full anti-cheat bypass for SoT using module stomping and manual mapping. Injected internal with custom PE loader.</p>
+                <ul class="tech">
+                    <li>Manual mapping</li>
+                    <li>Module stomping</li>
+                    <li>Import table reconstruction</li>
+                    <li>EAC syscall hook bypass</li>
+                </ul>
+            </article>
+
+            <p class="private-note">Lots more private projects worked on.</p>
+        </section>
+
+        <section class="contact">
+            <h2>Contact</h2>
+            <div class="contact-links">
+                <div class="contact-item">
+                    <img src="icons/mail.png" alt="">
+                    <span class="label">Email</span>
+                    <span class="value">oxygenmase [at] proton [dot] me</span>
+                </div>
+                <a href="https://github.com/yourusername" target="_blank">
+                    <img src="icons/github.png" alt="">
+                    <span class="label">GitHub</span>
+                    <span class="value">github.com/yourusername</span>
+                </a>
+                <a href="https://discord.com/users/yourid" target="_blank">
+                    <img src="icons/discord.png" alt="">
+                    <span class="label">Discord</span>
+                    <span class="value">yourusername</span>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <span class="copy">© 2026</span>
+            <span class="rights">All rights reserved.</span>
+        </footer>
+    </main>
+
+    <script>
+        window.addEventListener('load', () => {
+            const lines = document.querySelectorAll('.terminal .line');
+            const progressBar = document.querySelector('.progress-bar');
+            
+            lines.forEach((line, index) => {
+                setTimeout(() => {
+                    line.classList.add('visible');
+                }, index * 400);
+            });
+            
+            setTimeout(() => {
+                progressBar.style.width = '100%';
+            }, lines.length * 400 + 500);
+            
+            setTimeout(() => {
+                document.getElementById('splash').classList.add('fade');
+            }, lines.length * 400 + 2000);
+        });
+    </script>
+</body>
+</html>
